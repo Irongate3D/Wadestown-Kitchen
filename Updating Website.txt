@@ -1,7 +1,0 @@
-cd D:\Irongate\Wadestown-Kitchen
-git init
-git add .
-git commit -m "Initial site"
-git branch -M main
-git remote add origin https://github.com/Irongate3D/Wadestown-Kitchen.git
-git push -u origin main
