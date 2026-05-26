@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wadestown Kitchen — your neighbourhood café in Wadestown, Wellington since 2005. Fresh cabinet food, homemade frozen meals and soups, and more.">
+    <title>Wadestown Kitchen — EST 2005</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --orange:       #E8741A;
+            --orange-light: #F4954A;
+            --orange-pale:  #FEF0E4;
+            --green:        #5B9B2F;
+            --green-light:  #7BC142;
+            --teal:         #1BADA8;
+            --teal-light:   #3ECFCA;
+            --cream:        #FFF8F0;
+            --cream-mid:    #F5EDD8;
+            --chalk:        #1C1A17;
+            --chalk-text:   #F5F0E8;
+            --chalk-line:   rgba(245,240,232,0.18);
+            --brown-dark:   #2C1810;
+            --text-dark:    #2C1810;
+            --text-mid:     #6B3A2A;
+            --text-muted:   #9C7560;
+            --border:       rgba(44,24,16,0.12);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ── NAVIGATION ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1rem 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.35s, box-shadow 0.35s;
+        }
+
+        nav.scrolled {
+            background: rgba(255,248,240,0.96);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 24px rgba(44,24,16,0.1);
+        }
+
+        .nav-logo { height: 50px; width: auto; }
+
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+        .nav-links a {
+            font-weight: 700;
+            font-size: 0.78rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: white;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        nav.scrolled .nav-links a { color: var(--text-dark); }
+        .nav-links a:hover { color: var(--orange) !important; }
+
+        .nav-burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .nav-burger span {
+            width: 26px; height: 2px;
+            background: white;
+            transition: background 0.3s;
+            display: block;
+        }
+
+        nav.scrolled .nav-burger span { background: var(--text-dark); }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 620px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute; inset: 0;
+            background-image: url('images/counter.jpg');
+            background-size: cover;
+            background-position: center 40%;
+            transform: scale(1.06);
+            animation: heroZoom 18s ease-out forwards;
+        }
+
+        @keyframes heroZoom { to { transform: scale(1); } }
+
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(
+                155deg,
+                rgba(28,18,10,0.78) 0%,
+                rgba(232,116,26,0.38) 55%,
+                rgba(28,18,10,0.72) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative; z-index: 2;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            animation: heroFade 1.2s ease-out 0.4s both;
+        }
+
+        @keyframes heroFade {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-logo {
+            width: 110px; height: auto;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 4px 24px rgba(0,0,0,0.45));
+        }
+
+        .hero h1 {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(3.2rem, 9vw, 6.5rem);
+            font-weight: 700;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            text-shadow: 0 3px 32px rgba(0,0,0,0.35);
+            margin-bottom: 0.6rem;
+        }
+
+        .hero-est {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            opacity: 0.8;
+            letter-spacing: 0.18em;
+            margin-bottom: 1.4rem;
+        }
+
+        .hero-tagline {
+            font-size: clamp(0.95rem, 2.2vw, 1.2rem);
+            font-weight: 400;
+            opacity: 0.9;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-hours {
+            display: inline-flex;
+            gap: 2rem;
+            background: rgba(255,255,255,0.14);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.28);
+            border-radius: 50px;
+            padding: 0.65rem 2rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            margin-bottom: 2rem;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--orange);
+            color: white;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 0.9rem 2.8rem;
+            border-radius: 50px;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(232,116,26,0.5);
+        }
+
+        .hero-cta:hover {
+            background: var(--orange-light);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(232,116,26,0.55);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2.2rem; left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.5);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            animation: scrollBounce 2.5s infinite;
+        }
+
+        @keyframes scrollBounce {
+            0%,100% { transform: translateX(-50%) translateY(0); }
+            50%      { transform: translateX(-50%) translateY(7px); }
+        }
+
+        .hero-scroll::after {
+            content: '';
+            width: 1px; height: 32px;
+            background: rgba(255,255,255,0.35);
+        }
+
+        /* ── SHARED SECTION STYLES ── */
+        section { padding: 5.5rem 2rem; }
+
+        .container { max-width: 1080px; margin: 0 auto; }
+
+        .section-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 0.65rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--text-dark);
+            margin-bottom: 1.25rem;
+        }
+
+        .section-title em { font-style: italic; color: var(--orange); }
+
+        /* ── ABOUT ── */
+        #about { background: var(--cream); }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: var(--text-mid);
+            font-size: 1rem;
+            margin-bottom: 1.1rem;
+        }
+
+        .about-text p:last-of-type { margin-bottom: 0; }
+
+        .about-img {
+            position: relative;
+        }
+
+        .about-img img {
+            width: 100%; height: 430px;
+            object-fit: cover;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .about-img::before {
+            content: '';
+            position: absolute;
+            top: -14px; right: -14px; bottom: 14px; left: 14px;
+            border: 3px solid var(--orange);
+            border-radius: 4px;
+            z-index: -1;
+        }
+
+        .stat-row {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat { }
+
+        .stat-number {
+            font-family: 'Fraunces', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--orange);
+            line-height: 1;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
+
+        /* ── CABINET — CHALKBOARD ── */
+        #cabinet {
+            background: var(--chalk);
+            color: var(--chalk-text);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #cabinet::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image: repeating-linear-gradient(
+                0deg,
+                transparent, transparent 30px,
+                var(--chalk-line) 30px, var(--chalk-line) 31px
+            );
+        }
+
+        #cabinet .container { position: relative; z-index: 1; }
+        #cabinet .section-label { color: var(--teal-light); }
+        #cabinet .section-title { color: var(--chalk-text); }
+
+        .cabinet-intro {
+            color: rgba(245,240,232,0.68);
+            max-width: 580px;
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        .cabinet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.4rem;
+            margin-top: 3rem;
+        }
+
+        .cabinet-card {
+            background: rgba(245,240,232,0.06);
+            border: 1px solid rgba(245,240,232,0.14);
+            border-radius: 6px;
+            padding: 1.8rem 1.5rem;
+            transition: background 0.25s, transform 0.25s;
+        }
+
+        .cabinet-card:hover {
+            background: rgba(245,240,232,0.11);
+            transform: translateY(-4px);
+        }
+
+        .cabinet-card-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+
+        .cabinet-card h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--chalk-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .cabinet-card p {
+            font-size: 0.88rem;
+            color: rgba(245,240,232,0.6);
+            line-height: 1.65;
+        }
+
+        .chalk-note {
+            margin-top: 2.5rem;
+            padding: 1.4rem 2rem;
+            border: 1px dashed rgba(245,240,232,0.28);
+            border-radius: 6px;
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: rgba(245,240,232,0.7);
+            text-align: center;
+        }
+
+        /* ── FROZEN MEALS ── */
+        #frozen { background: var(--cream-mid); }
+
+        .frozen-intro {
+            color: var(--text-mid);
+            font-size: 1rem;
+            max-width: 640px;
+            margin-bottom: 3rem;
+        }
+
+        .frozen-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .frozen-col h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--orange);
+        }
+
+        .frozen-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .frozen-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+            color: var(--text-mid);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .frozen-list li:last-child { border-bottom: none; }
+
+        .frozen-list li::before {
+            content: '❄';
+            font-size: 0.72rem;
+            color: var(--teal);
+            flex-shrink: 0;
+        }
+
+        .frozen-callout {
+            margin-top: 3rem;
+            background: var(--orange);
+            color: white;
+            border-radius: 8px;
+            padding: 2rem 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+        }
+
+        .frozen-callout-icon { font-size: 2.8rem; flex-shrink: 0; }
+
+        .frozen-callout h4 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .frozen-callout p { font-size: 0.9rem; opacity: 0.9; line-height: 1.6; }
+
+        /* ── 3D PRINTING ── */
+        #printing { background: var(--cream); }
+
+        .printing-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .printing-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        .printing-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 1.2rem;
+            background: var(--cream-mid);
+            border-radius: 6px;
+            border-left: 3px solid var(--green);
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .printing-item:hover {
+            border-color: var(--orange);
+            transform: translateX(4px);
+        }
+
+        .printing-item-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+
+        .printing-item h4 {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .printing-item p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .printing-visual {
+            background: var(--cream-mid);
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            text-align: center;
+            border: 2px dashed var(--green);
+        }
+
+        .printing-visual-icon { font-size: 5rem; margin-bottom: 1.2rem; display: block; }
+
+        .printing-visual p {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ── FIND US ── */
+        #findus {
+            background: var(--orange);
+            color: white;
+        }
+
+        #findus .section-label { color: rgba(255,255,255,0.65); }
+        #findus .section-title { color: white; }
+
+        .findus-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-top: 3rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.1rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .info-icon {
+            width: 40px; height: 40px;
+            background: rgba(255,255,255,0.18);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .info-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            opacity: 0.65;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-value { font-size: 1rem; font-weight: 600; line-height: 1.5; }
+        .info-value a { color: white; text-decoration: none; }
+        .info-value a:hover { text-decoration: underline; }
+
+        .hours-table { width: 100%; border-collapse: collapse; }
+
+        .hours-table td {
+            padding: 0.4rem 0;
+            font-size: 0.92rem;
+        }
+
+        .hours-table td:first-child {
+            font-weight: 700;
+            padding-right: 1.5rem;
+            opacity: 0.75;
+        }
+
+        .hours-table tr:not(:last-child) td {
+            border-bottom: 1px solid rgba(255,255,255,0.18);
+        }
+
+        .map-container {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 330px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+
+        .map-container iframe {
+            width: 100%; height: 100%;
+            border: none;
+        }
+
+        /* ── CONTACT ── */
+        #contact { background: var(--cream-mid); }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-text p {
+            color: var(--text-mid);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-email-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--text-dark);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.88rem;
+            letter-spacing: 0.06em;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .contact-email-btn:hover {
+            background: var(--orange);
+            transform: translateY(-2px);
+        }
+
+        .contact-phone-note {
+            margin-top: 1.2rem;
+            padding: 1rem 1.25rem;
+            background: var(--orange-pale);
+            border-left: 3px solid var(--orange);
+            border-radius: 0 4px 4px 0;
+            font-size: 0.9rem;
+            color: var(--text-mid);
+        }
+
+        .contact-phone-note a {
+            color: var(--orange);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .newsletter-box {
+            background: var(--cream);
+            border-radius: 8px;
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .newsletter-box h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        .newsletter-box p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .newsletter-coming {
+            padding: 1.75rem;
+            background: var(--cream-mid);
+            border-radius: 6px;
+            text-align: center;
+            border: 2px dashed var(--border);
+        }
+
+        .newsletter-coming .nl-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+
+        .newsletter-coming strong {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            color: var(--text-mid);
+            font-weight: 400;
+            font-size: 1rem;
+            display: block;
+        }
+
+        .newsletter-coming small {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 0.2rem;
+            display: block;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--brown-dark);
+            color: rgba(255,248,240,0.55);
+            padding: 2.8rem 2rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            height: 52px; width: auto;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        footer p { font-size: 0.82rem; line-height: 2; }
+        footer a { color: var(--orange-light); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        /* ── FADE-IN OBSERVER ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 820px) {
+            .nav-links { display: none; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                inset: 0;
+                background: var(--cream);
+                align-items: center;
+                justify-content: center;
+                gap: 2.2rem;
+                z-index: 99;
+            }
+            .nav-links.open a {
+                color: var(--text-dark) !important;
+                font-size: 1.2rem;
+            }
+            .nav-burger { display: flex; }
+
+            .about-grid,
+            .printing-grid,
+            .findus-grid,
+            .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+            .frozen-columns { grid-template-columns: 1fr; gap: 2rem; }
+
+            .hero-hours { flex-direction: column; gap: 0.4rem; text-align: center; padding: 1rem 1.5rem; }
+
+            .about-img::before { display: none; }
+
+            .frozen-callout { flex-direction: column; text-align: center; }
+
+            section { padding: 3.5rem 1.25rem; }
+
+            .printing-grid { gap: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ══ NAVIGATION ══ -->
+<nav id="mainNav">
+    <img src="images/logo.png" alt="Wadestown Kitchen" class="nav-logo">
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#cabinet">Cabinet</a></li>
+        <li><a href="#frozen">Frozen Meals</a></li>
+        <li><a href="#printing">3D Printing</a></li>
+        <li><a href="#findus">Find Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-burger" id="burger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <img src="images/logo.png" alt="Wadestown Kitchen" class="hero-logo">
+        <h1>Wadestown<br>Kitchen</h1>
+        <p class="hero-est">EST 2005 &nbsp;·&nbsp; Wadestown, Wellington</p>
+        <p class="hero-tagline">Your neighbourhood kitchen. Real food, made with love, right here in the community.</p>
+        <div class="hero-hours">
+            <span>Mon–Fri &nbsp;7:30am–2pm</span>
+            <span>Saturday &nbsp;8am–12pm</span>
+        </div>
+        <br>
+        <a href="#about" class="hero-cta">Come on in</a>
+    </div>
+    <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-text">
+                <span class="section-label">Our Story</span>
+                <h2 class="section-title">A kitchen built on <em>community</em></h2>
+                <p>Since 2005, Wadestown Kitchen has been part of the fabric of this neighbourhood. What started as a full café has evolved into something more personal — run by Curtis and Kathy, it's a place where you know the people behind the counter and the food is genuinely made from scratch.</p>
+                <p>Everything in the cabinet is baked in-house fresh each day. The frozen meals are made with quality ingredients and frozen immediately to lock in the flavour. And if you need something unexpected, there's even a 3D printing table to browse while you wait for your coffee.</p>
+                <p>Small, warm, and genuinely local — that's Wadestown Kitchen.</p>
+                <div class="stat-row">
+                    <div class="stat reveal">
+                        <span class="stat-number">20+</span>
+                        <span class="stat-label">Years serving</span>
+                    </div>
+                    <div class="stat reveal">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Made in-house</span>
+                    </div>
+                    <div class="stat reveal">
+                        <span class="stat-number">GF</span>
+                        <span class="stat-label">Options daily</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-img reveal">
+                <img src="images/interior.jpg" alt="Inside Wadestown Kitchen — warm orange walls, cosy tables">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ CABINET — CHALKBOARD SECTION ══ -->
+<section id="cabinet">
+    <div class="container">
+        <span class="section-label">Fresh Daily</span>
+        <h2 class="section-title">From our cabinet</h2>
+        <p class="cabinet-intro">Kathy bakes every morning. The cabinet changes with the seasons, the mood, and what's good. Here's what you can usually expect:</p>
+
+        <div class="cabinet-grid">
+            <div class="cabinet-card reveal">
+                <div class="cabinet-card-icon">🥧</div>
+                <h3>Savouries &amp; Pies</h3>
+                <p>House-made savouries fresh from the oven, plus a range of gourmet pies from quality suppliers.</p>
+            </div>
+            <div class="cabinet-card reveal">
+                <div class="cabinet-card-icon">🍰</div>
+                <h3>Slices &amp; Baking</h3>
+                <p>A generous spread of slices, cookies, and muesli bars — the sugary kind, the healthy kind, and everything in between.</p>
+            </div>
+            <div class="cabinet-card reveal">
+                <div class="cabinet-card-icon">🌿</div>
+                <h3>Gluten Free Options</h3>
+                <p>Kathy keeps a great range of GF choices in the cabinet every day — no afterthought, genuinely good.</p>
+            </div>
+            <div class="cabinet-card reveal">
+                <div class="cabinet-card-icon">☕</div>
+                <h3>Great Coffee</h3>
+                <p>Bach Espresso beans on our iconic teal machine. Come for the coffee, stay for everything else.</p>
+            </div>
+        </div>
+
+        <div class="chalk-note">
+            "The cabinet changes daily — come in and see what Kathy's made this morning."
+        </div>
+    </div>
+</section>
+
+<!-- ══ FROZEN MEALS ══ -->
+<section id="frozen">
+    <div class="container">
+        <span class="section-label">Take Home</span>
+        <h2 class="section-title">Stock your <em>freezer</em></h2>
+        <p class="frozen-intro">All made fresh in our kitchen with quality ingredients and immediately frozen to lock in the goodness. A firm favourite with our regulars — many come in weekly to stock up. Perfect when you don't feel like cooking but still want a proper meal.</p>
+
+        <div class="frozen-columns">
+            <div class="frozen-col reveal">
+                <h3>🍲 Soups</h3>
+                <ul class="frozen-list">
+                    <li>Pumpkin</li>
+                    <li>Kūmara</li>
+                    <li>Broccoli &amp; Blue Cheese</li>
+                    <li>Chicken Lemon Risoni</li>
+                    <li>Ham Hock &amp; Split Pea</li>
+                </ul>
+            </div>
+            <div class="frozen-col reveal">
+                <h3>🥘 Meals</h3>
+                <ul class="frozen-list">
+                    <li>Italian Beef Lasagne</li>
+                    <li>Cottage Pie</li>
+                    <li>Mac &amp; Cheese</li>
+                    <li>Fish Pie</li>
+                    <li>A range of curries</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="frozen-callout reveal">
+            <div class="frozen-callout-icon">❄️</div>
+            <div>
+                <h4>A community service we're proud of</h4>
+                <p>Many of our older customers come in regularly to stock their freezers — taking the burden of cooking every day off their shoulders, without sacrificing a proper home-cooked meal made with fresh ingredients.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ 3D PRINTING ══ -->
+<section id="printing">
+    <div class="container">
+        <div class="printing-grid">
+            <div>
+                <span class="section-label">Something Different</span>
+                <h2 class="section-title">The 3D printing <em>table</em></h2>
+                <p style="color:var(--text-mid); font-size:1rem;">While you wait for your order, have a browse. We keep a small rotating table of 3D printed items — useful, playful, and always changing.</p>
+
+                <div class="printing-items">
+                    <div class="printing-item reveal">
+                        <div class="printing-item-icon">🔧</div>
+                        <div>
+                            <h4>Tool Accessories</h4>
+                            <p>Battery holders and practical bits — popular with the builders and tradies who stop in.</p>
+                        </div>
+                    </div>
+                    <div class="printing-item reveal">
+                        <div class="printing-item-icon">🐉</div>
+                        <div>
+                            <h4>Dragons &amp; Collectibles</h4>
+                            <p>The kids love them. Honestly, so do the adults. New designs appear regularly.</p>
+                        </div>
+                    </div>
+                    <div class="printing-item reveal">
+                        <div class="printing-item-icon">🎨</div>
+                        <div>
+                            <h4>Gifts &amp; Novelties</h4>
+                            <p>A rotating mix of printed items. Something new to discover each time you visit.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="printing-visual reveal">
+                <span class="printing-visual-icon">🖨️</span>
+                <p>New items added regularly.<br><br>Ask us what's on the table today — or put in a custom request.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ FIND US ══ -->
+<section id="findus">
+    <div class="container">
+        <span class="section-label">Getting Here</span>
+        <h2 class="section-title">Come find us</h2>
+        <div class="findus-grid">
+            <div>
+                <div class="info-item reveal">
+                    <div class="info-icon">📍</div>
+                    <div>
+                        <div class="info-label">Address</div>
+                        <div class="info-value">104 Wadestown Road<br>Wadestown, Wellington, NZ</div>
+                    </div>
+                </div>
+                <div class="info-item reveal">
+                    <div class="info-icon">🕐</div>
+                    <div>
+                        <div class="info-label">Hours</div>
+                        <div class="info-value">
+                            <table class="hours-table">
+                                <tr><td>Mon – Fri</td><td>7:30am – 2:00pm</td></tr>
+                                <tr><td>Saturday</td><td>8:00am – 12:00pm</td></tr>
+                                <tr><td>Sunday</td><td>Closed</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-item reveal">
+                    <div class="info-icon">📞</div>
+                    <div>
+                        <div class="info-label">Phone</div>
+                        <div class="info-value"><a href="tel:+6444734916">04 473 4916</a></div>
+                    </div>
+                </div>
+                <div class="info-item reveal">
+                    <div class="info-icon">✉️</div>
+                    <div>
+                        <div class="info-label">Email</div>
+                        <div class="info-value"><a href="mailto:kitchen@wadestown.co.nz">kitchen@wadestown.co.nz</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal">
+                <div class="map-container">
+                    <iframe
+                        src="https://maps.google.com/maps?q=104+Wadestown+Road,+Wadestown,+Wellington,+New+Zealand&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        allowfullscreen=""
+                        loading="lazy"
+                        title="Wadestown Kitchen map">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-text">
+                <span class="section-label">Get In Touch</span>
+                <h2 class="section-title">Say <em>hello</em></h2>
+                <p>Questions about frozen meals? Curious about catering? Want to know what's in the cabinet today? Drop us a line — Curtis or Kathy will get back to you.</p>
+                <a href="mailto:kitchen@wadestown.co.nz" class="contact-email-btn">
+                    ✉️ &nbsp;Email us
+                </a>
+                <div class="contact-phone-note">
+                    Or call us on <a href="tel:+6444734916">04 473 4916</a> — we're in the kitchen most mornings.
+                </div>
+            </div>
+            <div class="newsletter-box reveal">
+                <h3>Newsletter — coming soon</h3>
+                <p>Sign up to hear about new frozen meal flavours, what Kathy's been baking, and the occasional special. We won't spam you — just the good stuff.</p>
+                <div class="newsletter-coming">
+                    <div class="nl-icon">📬</div>
+                    <strong>Newsletter signup coming soon</strong>
+                    <small>In the meantime, just give us a call or pop in.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+    <img src="images/logo.png" alt="Wadestown Kitchen" class="footer-logo">
+    <p>
+        104 Wadestown Road, Wadestown, Wellington &nbsp;·&nbsp; <a href="tel:+6444734916">04 473 4916</a><br>
+        <a href="mailto:kitchen@wadestown.co.nz">kitchen@wadestown.co.nz</a><br><br>
+        © <span id="year"></span> Wadestown Kitchen &nbsp;·&nbsp; EST 2005 &nbsp;·&nbsp; Made with ❤️ in Wellington
+    </p>
+</footer>
+
+<script>
+    // ── Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ── Sticky nav
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── Mobile burger
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('navLinks');
+
+    burger.addEventListener('click', () => {
+        const open = navLinks.classList.toggle('open');
+        burger.setAttribute('aria-expanded', open);
+    });
+
+    navLinks.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+            navLinks.classList.remove('open');
+            burger.setAttribute('aria-expanded', false);
+        });
+    });
+
+    // ── Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                observer.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+        el.style.transitionDelay = `${(i % 4) * 0.08}s`;
+        observer.observe(el);
+    });
+</script>
+
+</body>
+</html>
