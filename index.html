@@ -732,6 +732,137 @@
         footer a { color: var(--orange-light); text-decoration: none; }
         footer a:hover { text-decoration: underline; }
 
+        /* ── PHOTO CAROUSEL ── */
+        .carousel-wrap {
+            margin-top: 2.5rem;
+            position: relative;
+        }
+
+        .carousel {
+            display: flex;
+            gap: 1rem;
+            overflow: hidden;
+            position: relative;
+            border-radius: 8px;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 1rem;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+
+        .carousel-slide {
+            flex: 0 0 calc(33.333% - 0.67rem);
+            aspect-ratio: 4/3;
+            border-radius: 6px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.06);
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .carousel-slide:hover img { transform: scale(1.04); }
+
+        /* Dark section carousel (cabinet) */
+        .carousel-dark .carousel-slide {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(245,240,232,0.1);
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: background 0.2s, transform 0.2s;
+            background: rgba(255,255,255,0.92);
+            color: var(--text-dark);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+        }
+
+        .carousel-btn:hover {
+            background: var(--orange);
+            color: white;
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        .carousel-btn-dark {
+            background: rgba(245,240,232,0.15);
+            color: var(--chalk-text);
+        }
+
+        .carousel-btn-dark:hover {
+            background: var(--teal);
+            color: white;
+        }
+
+        .carousel-btn-prev { left: -18px; }
+        .carousel-btn-next { right: -18px; }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .carousel-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--border);
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            padding: 0;
+        }
+
+        .carousel-dot.active {
+            background: var(--orange);
+            transform: scale(1.3);
+        }
+
+        .carousel-dot-dark { background: rgba(245,240,232,0.25); }
+        .carousel-dot-dark.active { background: var(--teal-light); }
+
+        .carousel-loading {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-style: italic;
+            background: var(--cream-mid);
+            border-radius: 8px;
+        }
+
+        .carousel-loading-dark {
+            background: rgba(255,255,255,0.04);
+            color: rgba(245,240,232,0.4);
+        }
+
+        @media (max-width: 820px) {
+            .carousel-slide { flex: 0 0 calc(100% - 0rem); }
+            .carousel-btn-prev { left: -10px; }
+            .carousel-btn-next { right: -10px; }
+        }
+
         /* ── FADE-IN OBSERVER ── */
         .reveal {
             opacity: 0;
@@ -850,7 +981,15 @@
                 </div>
             </div>
             <div class="about-img reveal">
-                <img src="images/interior.jpg" alt="Inside Wadestown Kitchen — warm orange walls, cosy tables">
+                <div class="carousel-wrap" id="carousel-about-wrap">
+                    <div class="carousel-loading" id="carousel-about-loading">Loading photos…</div>
+                    <div class="carousel" id="carousel-about" style="display:none">
+                        <button class="carousel-btn carousel-btn-prev" data-carousel="about" aria-label="Previous">&#8592;</button>
+                        <div class="carousel-track" id="carousel-about-track"></div>
+                        <button class="carousel-btn carousel-btn-next" data-carousel="about" aria-label="Next">&#8594;</button>
+                    </div>
+                    <div class="carousel-dots" id="carousel-about-dots"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -888,6 +1027,16 @@
 
         <div class="chalk-note">
             "The cabinet changes daily — come in and see what Kathy's made this morning."
+        </div>
+
+        <div class="carousel-wrap" id="carousel-cabinet-wrap">
+            <div class="carousel-loading carousel-loading-dark" id="carousel-cabinet-loading">Loading photos…</div>
+            <div class="carousel carousel-dark" id="carousel-cabinet" style="display:none">
+                <button class="carousel-btn carousel-btn-prev carousel-btn-dark" data-carousel="cabinet" aria-label="Previous">&#8592;</button>
+                <div class="carousel-track" id="carousel-cabinet-track"></div>
+                <button class="carousel-btn carousel-btn-next carousel-btn-dark" data-carousel="cabinet" aria-label="Next">&#8594;</button>
+            </div>
+            <div class="carousel-dots" id="carousel-cabinet-dots"></div>
         </div>
     </div>
 </section>
@@ -929,6 +1078,16 @@
                 <p>Many of our older customers come in regularly to stock their freezers — taking the burden of cooking every day off their shoulders, without sacrificing a proper home-cooked meal made with fresh ingredients.</p>
             </div>
         </div>
+
+        <div class="carousel-wrap" id="carousel-frozen-wrap" style="margin-top:3rem">
+            <div class="carousel-loading" id="carousel-frozen-loading">Loading photos…</div>
+            <div class="carousel" id="carousel-frozen" style="display:none">
+                <button class="carousel-btn carousel-btn-prev" data-carousel="frozen" aria-label="Previous">&#8592;</button>
+                <div class="carousel-track" id="carousel-frozen-track"></div>
+                <button class="carousel-btn carousel-btn-next" data-carousel="frozen" aria-label="Next">&#8594;</button>
+            </div>
+            <div class="carousel-dots" id="carousel-frozen-dots"></div>
+        </div>
     </div>
 </section>
 
@@ -965,9 +1124,16 @@
                     </div>
                 </div>
             </div>
-            <div class="printing-visual reveal">
-                <span class="printing-visual-icon">🖨️</span>
-                <p>New items added regularly.<br><br>Ask us what's on the table today — or put in a custom request.</p>
+            <div class="reveal">
+                <div class="carousel-wrap" id="carousel-printing-wrap">
+                    <div class="carousel-loading" id="carousel-printing-loading">Loading photos…</div>
+                    <div class="carousel" id="carousel-printing" style="display:none">
+                        <button class="carousel-btn carousel-btn-prev" data-carousel="printing" aria-label="Previous">&#8592;</button>
+                        <div class="carousel-track" id="carousel-printing-track"></div>
+                        <button class="carousel-btn carousel-btn-next" data-carousel="printing" aria-label="Next">&#8594;</button>
+                    </div>
+                    <div class="carousel-dots" id="carousel-printing-dots"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -1094,19 +1260,171 @@
     });
 
     // ── Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
+    const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(e => {
             if (e.isIntersecting) {
                 e.target.classList.add('visible');
-                observer.unobserve(e.target);
+                revealObserver.unobserve(e.target);
             }
         });
     }, { threshold: 0.12 });
 
     document.querySelectorAll('.reveal').forEach((el, i) => {
         el.style.transitionDelay = `${(i % 4) * 0.08}s`;
-        observer.observe(el);
+        revealObserver.observe(el);
     });
+
+    // ══════════════════════════════════════════
+    // PHOTO CAROUSELS — GitHub Contents API
+    // ══════════════════════════════════════════
+
+    // ⚙️  SET THESE to your GitHub username and repo name
+    const GITHUB_USER = 'Irongate3D';
+    const GITHUB_REPO = 'Wadestown-Kitchen';
+
+    // Map of carousel id → folder name in /images/
+    const CAROUSEL_CONFIG = [
+        { id: 'about',    folder: 'About',         dark: false },
+        { id: 'cabinet',  folder: 'Cabinet',        dark: true  },
+        { id: 'frozen',   folder: 'Freezer_Meals',  dark: false },
+        { id: 'printing', folder: '3D_Printing',    dark: false },
+    ];
+
+    // State per carousel
+    const carouselState = {};
+
+    function slidesVisible() {
+        return window.innerWidth <= 820 ? 1 : 3;
+    }
+
+    function buildCarousel(cfg, imageFiles) {
+        const { id, dark } = cfg;
+        const track   = document.getElementById(`carousel-${id}-track`);
+        const dots    = document.getElementById(`carousel-${id}-dots`);
+        const loading = document.getElementById(`carousel-${id}-loading`);
+        const wrapper = document.getElementById(`carousel-${id}`);
+
+        if (!imageFiles.length) {
+            loading.textContent = 'Photos coming soon.';
+            return;
+        }
+
+        // Build slides
+        imageFiles.forEach(file => {
+            const slide = document.createElement('div');
+            slide.className = 'carousel-slide';
+            const img = document.createElement('img');
+            // Use raw.githubusercontent.com for direct image delivery
+            img.src = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/main/images/${cfg.folder}/${file}`;
+            img.alt = file.replace(/[-_]/g, ' ').replace(/\.[^.]+$/, '');
+            img.loading = 'lazy';
+            slide.appendChild(img);
+            track.appendChild(slide);
+        });
+
+        const total = imageFiles.length;
+        const vis   = slidesVisible();
+        const maxIdx = Math.max(0, total - vis);
+
+        // Build dots
+        const numDots = Math.ceil(total / vis);
+        for (let i = 0; i < numDots; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot' + (dark ? ' carousel-dot-dark' : '');
+            if (i === 0) dot.classList.add('active');
+            dot.setAttribute('aria-label', `Go to slide group ${i + 1}`);
+            dot.addEventListener('click', () => goTo(id, i * vis));
+            dots.appendChild(dot);
+        }
+
+        carouselState[id] = { idx: 0, total, vis, maxIdx };
+
+        // Show carousel, hide loader
+        loading.style.display = 'none';
+        wrapper.style.display = 'flex';
+
+        updateCarousel(id);
+    }
+
+    function goTo(id, idx) {
+        const s = carouselState[id];
+        if (!s) return;
+        s.idx = Math.max(0, Math.min(idx, s.maxIdx));
+        updateCarousel(id);
+    }
+
+    function updateCarousel(id) {
+        const s      = carouselState[id];
+        const track  = document.getElementById(`carousel-${id}-track`);
+        const dots   = document.getElementById(`carousel-${id}-dots`).querySelectorAll('.carousel-dot');
+        const slides = track.querySelectorAll('.carousel-slide');
+        if (!slides.length) return;
+
+        const slideW  = slides[0].getBoundingClientRect().width;
+        const gap     = 16;
+        const offset  = s.idx * (slideW + gap);
+        track.style.transform = `translateX(-${offset}px)`;
+
+        const activeDot = Math.floor(s.idx / s.vis);
+        dots.forEach((d, i) => d.classList.toggle('active', i === activeDot));
+    }
+
+    // Button clicks (delegated)
+    document.addEventListener('click', e => {
+        const btn = e.target.closest('.carousel-btn');
+        if (!btn) return;
+        const id = btn.dataset.carousel;
+        const s  = carouselState[id];
+        if (!s) return;
+        const dir = btn.classList.contains('carousel-btn-prev') ? -1 : 1;
+        let next  = s.idx + dir;
+        // Loop
+        if (next < 0)       next = s.maxIdx;
+        if (next > s.maxIdx) next = 0;
+        goTo(id, next);
+    });
+
+    // Auto-advance every 5s
+    setInterval(() => {
+        Object.keys(carouselState).forEach(id => {
+            const s = carouselState[id];
+            goTo(id, s.idx >= s.maxIdx ? 0 : s.idx + 1);
+        });
+    }, 5000);
+
+    // Recalculate on resize
+    window.addEventListener('resize', () => {
+        Object.keys(carouselState).forEach(id => {
+            const s = carouselState[id];
+            s.vis    = slidesVisible();
+            s.maxIdx = Math.max(0, s.total - s.vis);
+            if (s.idx > s.maxIdx) s.idx = s.maxIdx;
+            updateCarousel(id);
+        });
+    });
+
+    // ── Fetch images from GitHub Contents API
+    async function loadCarousel(cfg) {
+        const { id, folder } = cfg;
+        const url = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/images/${folder}`;
+        try {
+            const res  = await fetch(url, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+            const images = data
+                .filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f.name))
+                .map(f => f.name);
+            buildCarousel(cfg, images);
+        } catch (err) {
+            const loading = document.getElementById(`carousel-${id}-loading`);
+            loading.textContent = 'Photos coming soon.';
+            console.warn(`Carousel ${id} failed:`, err);
+        }
+    }
+
+    // Load all carousels
+    CAROUSEL_CONFIG.forEach(cfg => loadCarousel(cfg));
+
 </script>
 
 </body>
